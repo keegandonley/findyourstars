@@ -7,7 +7,7 @@ export default class MapScreen extends Component {
   state = {
     lat: 51.505,
     lng: -0.09,
-    zoom: 20,
+    zoom: 13,
   }
 
   render() {
