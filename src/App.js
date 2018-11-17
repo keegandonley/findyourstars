@@ -7,7 +7,8 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Route route="/" exact component={Screens.Landing} />
+        <Route path="/" exact component={Screens.Landing} />
+        <Route path='/map' component={Screens.Map}/>
       </React.Fragment>
     );
   }
