@@ -62,7 +62,7 @@ export default class Landing extends Component {
 	}
 
 	componentDidMount() {
-		sessionStorage.setItem('refreshed', true);
+		localStorage.setItem('data', true);
 		const stars = new Starjs({ id: 'myStars' });
 		stars.init();
 		this.getGeometries();

@@ -26,16 +26,14 @@ export default class MapScreen extends Component {
   }
   
   componentDidMount() {
-    const res = sessionStorage.getItem('refreshed');
+    const res = localStorage.getItem('data');
     if (res !== 'true') {
       window.location = '/';
     } else {
-      sessionStorage.setItem('refreshed', false);
+      this.buildGeoJSON();
+      this.getISSLocation();
+      navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this));
     }
-
-    this.buildGeoJSON();
-    this.getISSLocation();
-    navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this));
   }
 
   async error(err) {
