@@ -25,6 +25,7 @@ code {
   z-index: 0;
 }
 
+/* Styles to override the datepicker */
 .DateRangePicker *, .SingleDatePicker *, .DayPickerRangeController * {
   box-sizing: border-box;
 }
@@ -54,4 +55,24 @@ input.DateInput_input {
 
 .DateRangePickerInput_arrow {
   vertical-align: unset !important;
+}
+
+.CalendarDay__selected_span {
+  background: #3288FF !important;
+  border: 1px double #2E56A0 !important;
+}
+
+.CalendarDay__hovered_span {
+  background: #73B1FF !important;
+  border: 1px double #2E56A0 !important;
+  color: #334E70 !important;
+}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+  background: #2E56A0 !important;
+  border: 1px double #4A88FF !important;
+}
+
+.DayPickerKeyboardShortcuts_show__bottomRight {
+  border-right: 33px solid #3288FF !important;
 }
