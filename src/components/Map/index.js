@@ -1,5 +1,6 @@
-
+/* eslint-disable react/style-prop-object */
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Map, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import MapboxLayer from '../MapBox';
@@ -32,7 +33,17 @@ export default class MapComponent extends Component {
           renderWorldCopies={false}
         >
         </MapboxLayer>
-        {this.props.solarPathEnabled ? <GeoJSON data={geoJSON} key={`gjson-layer-at-${Date.now()}`}/> : null}
+        {this.props.solarPathEnabled
+          ? (
+            <GeoJSON
+              data={geoJSON}
+              key={`gjson-layer-at${Date.now()}`}
+              onEachFeature={(feature, layer) => {
+                console.log(feature.properties.date);
+                layer.bindPopup(`${moment.utc(feature.properties.date, 'X').format('MMM DD, YYYY')}`);
+              }}
+            />
+          ) : null}
         <Marker position={currentPosition}>
           <Popup>
             You are Here

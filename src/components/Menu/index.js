@@ -13,7 +13,7 @@ function getConditions(conditions) {
     if (!conditions) {
       return null;
     }
-    const { currently, daily, minutely } = conditions;
+    const { currently, daily } = conditions;
 
     return (
       <React.Fragment>
@@ -28,7 +28,7 @@ function getConditions(conditions) {
           <FontAwesomeIcon icon={getTherm(currently.temperature)} />{Math.round(currently.temperature)}°F
         </Condition>
         <Condition>
-          <FontAwesomeIcon icon={faCloud} />Cloud cover: {currently.cloudCover}
+          <FontAwesomeIcon icon={faCloud} />Cloud cover: {currently.cloudCover * 100}%
         </Condition>
         <Condition>
           <strong>Events</strong>
@@ -49,7 +49,7 @@ export default class Menu extends Component {
     return (
         <Wrapper>
           <Header>
-            <img src={Logo} />
+            <img src={Logo} alt="logo" />
           </Header>
           <Container>
             <ToggleSwitch label={"Paths for Solar Eclipse"} clickHandler={this.props.toggleSolarEclipsePaths}/>

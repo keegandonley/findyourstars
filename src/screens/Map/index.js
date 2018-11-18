@@ -95,7 +95,9 @@ export default class MapScreen extends Component {
             coordinates: [],
           },
           properties: {
-            name: path.name
+            name: path.name,
+            date: path.epoch,
+            duration: path.DurationSeconds,
           }
         }
       }
@@ -127,6 +129,7 @@ export default class MapScreen extends Component {
         <Wrapper>
             <Menu
                 toggleSolarEclipsePaths={this.toggleSolarEclipsePaths.bind(this)}
+                solarPathEnabled={this.state.solarPathEnabled}
                 startDate={startDate}
                 startDateId={startDate && startDate.toString() || 'startDate-noID'}
                 endDateId={endDate && endDate.toString() || 'endDate-noID'}
