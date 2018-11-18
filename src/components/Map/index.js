@@ -1,4 +1,4 @@
-
+/* eslint-disable react/style-prop-object */
 import React, { Component } from 'react';
 import { Map, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';

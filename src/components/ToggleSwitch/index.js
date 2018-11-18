@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Logo from '../../resources/findyourstars_logo.svg';
 import {Wrapper, Switch, Slider} from './components';
 
 export default class ToggleSwitch extends Component {
