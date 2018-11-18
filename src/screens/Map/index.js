@@ -36,7 +36,7 @@ export default class MapScreen extends Component {
   }
 
   async getISSLocation() {
-    const { data } = await Axios.get('http://api.open-notify.org/iss-now.json');
+    const { data } = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/iss');
     this.setState({ ISSPosition: data.iss_position });
   }
 
