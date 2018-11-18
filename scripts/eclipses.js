@@ -81,4 +81,4 @@ clean.forEach((element) => {
 	// });
 });
 
-fs.writeFileSync(path.join(__dirname, '../src/data/eclipse_geometries.json'), JSON.stringify(geometries));
+fs.writeFileSync(path.join(__dirname, '../public/data/eclipse_geometries.json'), JSON.stringify(geometries));

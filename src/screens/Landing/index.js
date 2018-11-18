@@ -1,41 +1,63 @@
 import React, { Component } from 'react';
+import Dexie from 'dexie';
+import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/pro-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
-import { Wrapper, StarContainer, LoadingStar, LoaderWrapper, LoaderInner, LoadingText, LoadingData } from './components';
+import {
+	Wrapper,
+	StarContainer,
+	LoadingStar,
+	LoaderWrapper,
+	LoaderInner,
+	LoadingText,
+	LoadingData
+} from './components';
 import Starjs from './stargen';
-import eclipses from '../../data/eclipse_geometries.json';
 
 export default class Landing extends Component {
 	state = {
 		loading: true,
 		loadingPerc: 0,
-		loadingText: 'preparing'
+		loadingText: 'preparing',
+		geometries: {},
+	}
+	async getGeometries() {
+		await this.setState({ loadingPerc: 10, loadingText: 'fetching eclipse geometries' });
+		let { data } = await Axios.get(`/data/eclipse_geometries.json`);
+		const db = new Dexie("Geometries");
+		db.version(2).stores({
+			eclipses: "&id",
+			paths: "&id",
+		});
+		await db.eclipses.bulkPut(Object.keys(data).map((id) => {
+			return {
+				id: id,
+				value: data[id]
+			};
+		}));
+		await this.setState({ loadingPerc: 25, loadingText: 'fetching eclipse locations' });
+		const eclipses = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/http');
+		await db.paths.bulkPut(eclipses.data.map((eclipse) => {
+			const { eclipse_id, ...rest } = eclipse;
+			if (!eclipse_id) {
+				return null;
+			}
+			return {
+				id: eclipse_id,
+				...rest
+			};
+		}).filter(x => x));
+		db.close();
+		await this.setState({ loadingPerc: 100, loadingText: 'logging you in securely', geometries: data });
+		setTimeout(() => {
+			this.setState({ loading: false });
+		}, 2000);
 	}
 	componentDidMount() {
 		const stars = new Starjs({ id: 'myStars' });
 		stars.init();
-		setTimeout(() => {
-			this.setState({ loadingPerc: 10 });
-		}, 1000);
-		setTimeout(() => {
-			this.setState({ loadingPerc: 25, loadingText: 'fetching map data' });
-		}, 2000);
-		setTimeout(() => {
-			this.setState({ loadingPerc: 50, loadingText: 'fetching map images' });
-		}, 3000);
-		setTimeout(() => {
-			this.setState({ loadingPerc: 75, loadingText: 'logging in securely' });
-		}, 4000);
-		setTimeout(() => {
-			this.setState({ loadingPerc: 100, loadingText: 'redirecting' });
-		}, 5000);
-		setTimeout(() => {
-			this.setState({ loading: false });
-		}, 7000);
-		if (navigator.geolocation) {
-			console.log(navigator.geolocation.getCurrentPosition);
-		};
+		this.getGeometries();
 	}
 
 	render() {
