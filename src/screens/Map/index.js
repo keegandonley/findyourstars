@@ -7,8 +7,8 @@ import Dexie from 'dexie';
   
 export default class MapScreen extends Component {
   state = {
-    lat: 51.505,
-    lng: -0.09,
+    lat: 39.8283,
+    lng: -98.5795,
     zoom: 13,
     geoJSON: null,
   }

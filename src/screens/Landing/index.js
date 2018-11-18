@@ -54,6 +54,7 @@ export default class Landing extends Component {
 			this.setState({ loading: false });
 		}, 2000);
 	}
+
 	componentDidMount() {
 		const stars = new Starjs({ id: 'myStars' });
 		stars.init();

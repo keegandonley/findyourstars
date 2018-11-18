@@ -1,30 +1,24 @@
 
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
-  
+import MapboxLayer from '../MapBox';
+
+
 export default class MapComponent extends Component {
   state = {
-    currentLat: 51.505,
-    currentLng: -0.09,
     zoom: 13,
-  }
-  
-  componentDidMount() {
-    this.setState({
-      currentLat: this.props.currentLat,
-      currentLng: this.props.currentLng,
-    });
   }
 
   render() {
-    const currentPosition = [this.state.currentLat, this.state.currentLng];
+    const currentPosition = [this.props.currentLat, this.props.currentLng];
     const { geoJSON } = this.props;
     return (
       <Map center={currentPosition} zoom={this.state.zoom}>
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-        />
+        <MapboxLayer
+          accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          style='mapbox://styles/mauricebecnel400/cjomdc81d1tch2sp3zcedcmqv'
+        >
+        </MapboxLayer>
         <GeoJSON
           data={geoJSON}
         />
