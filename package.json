@@ -14,13 +14,16 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "styled-components": "^4.1.1"
+    "styled-components": "^4.1.1",
+    "@fortawesome/fontawesome-pro": "^5.5.0",
+    "@google-cloud/datastore": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "process": "node ./scripts/eclipses.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,8 +33,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "@fortawesome/fontawesome-pro": "^5.5.0"
-  }
+  ]
 }
