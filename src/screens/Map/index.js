@@ -13,7 +13,7 @@ export default class MapScreen extends Component {
     lat: 39.8283,
     lng: -98.5795,
     geoJSON: null,
-    solarPathEnabled: false,
+    solarPathEnabled: true,
   }
   
   componentDidMount() {
@@ -77,7 +77,9 @@ export default class MapScreen extends Component {
             coordinates: [],
           },
           properties: {
-            name: path.name
+            name: path.name,
+            date: path.epoch,
+            duration: path.DurationSeconds,
           }
         }
       }
@@ -108,6 +110,7 @@ export default class MapScreen extends Component {
         <Wrapper>
             <Menu
                 toggleSolarEclipsePaths={this.toggleSolarEclipsePaths.bind(this)}
+                solarPathEnabled={this.state.solarPathEnabled}
                 conditions={conditions || null}
             />
             {

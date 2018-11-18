@@ -4,7 +4,7 @@ import {Wrapper, Switch, Slider} from './components';
 export default class ToggleSwitch extends Component {
 
     state = {
-        enabled: false
+        enabled: true
     }
 
     clickHandler() {
