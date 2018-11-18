@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	font-size: 2em;
+	background-color: #191A1A;
 `;	
 
 export const MapLoader = styled.div`
