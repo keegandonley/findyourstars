@@ -10,7 +10,7 @@ export default class MapComponent extends Component {
   }
   
   componentDidMount() {
-    console.log('mounted child: ', this.state.currentLat);
+    console.log('mounted child: ', this.props.currentLat);
     this.setState({
       currentLat: this.props.currentLat,
       currentLng: this.props.currentLng,
