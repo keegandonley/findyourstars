@@ -1,10 +1,10 @@
 <div align="center">
 
-# findyourstars.com
+# [findyourstars.com](findyourstars.com)
 
 </div>
 
-The code repository for findyourstars.com.
+The code repository for [findyourstars.com](https://findyourstars.com).
 The purpose of this project is to visualize data important in planning stargazing or other astronomy activities. 
 
 Paths of upcoming solar eclipses can be seen on a map along with the location of the International Space Station. Current conditions that affect sky visibility are also available.
@@ -26,4 +26,4 @@ Data originates from various sources, and large geoJSON datasets are processed a
 The application frontend is build using React and Leaflet. Attribution for data sources can be found within the application.
 
 # Use
-The application is deployed at https://findyourstars.com
+The application is deployed at [https://findyourstars.com](https://findyourstars.com)
