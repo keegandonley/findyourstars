@@ -1,11 +1,12 @@
 /* eslint-disable no-mixed-operators */
 import React, { Component } from 'react';
 import moment from 'moment';
-import {Wrapper, MapLoader} from './components';
+import {Wrapper, MapLoader, LocationIcon} from './components';
 import MapComponent from '../../components/Map';
 import Menu from '../../components/Menu';
 import Dexie from 'dexie';
 import { faStar } from '@fortawesome/pro-solid-svg-icons';
+import { faLocation } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Axios from 'axios';
 import 'react-dates/initialize';
@@ -82,7 +83,6 @@ export default class MapScreen extends Component {
   }
 
   changeYear(year){
-      console.log(this.state.currentYear);
       this.setState({currentYear: year});
   }
 
@@ -151,13 +151,21 @@ export default class MapScreen extends Component {
             />
             {
               geoJSON && ISSPosition
-                ? <MapComponent 
-                    currentLat={this.state.lat}
-                    currentLng={this.state.lng}
-                    geoJSON={geoJSON}
-                    ISSPosition={ISSPosition}
-                    solarPathEnabled={this.state.solarPathEnabled}
-                  />
+                ? <React.Fragment>
+                    <MapComponent 
+                      currentLat={this.state.lat}
+                      currentLng={this.state.lng}
+                      geoJSON={geoJSON}
+                      ISSPosition={ISSPosition}
+                      solarPathEnabled={this.state.solarPathEnabled}
+                    />
+                    <LocationIcon>
+                      <FontAwesomeIcon
+                        icon={faLocation}
+                        onClick={() => navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this))}
+                      />
+                    </LocationIcon>
+                  </React.Fragment>
                 : <MapLoader>
                   <div>
                     <FontAwesomeIcon spin icon={faStar} />

@@ -51,7 +51,7 @@ export default class Landing extends Component {
 				};
 			}).filter(x => x));
 			db.close();
-			await this.setState({ loadingPerc: 100, loadingText: 'logging you in securely', geometries: data });
+			await this.setState({ loadingPerc: 100, loadingText: 'setting up application', geometries: data });
 			setTimeout(() => {
 				this.setState({ loading: false });
 			}, 2000);

@@ -26,7 +26,14 @@ export default class MapComponent extends Component {
     });
 
     return (
-      <Map center={currentPosition} zoom={this.state.zoom} maxBounds={[[-90,-180], [90,180]]} minZoom={3}>
+      <Map
+        center={currentPosition}
+        zoom={this.state.zoom}
+        maxBounds={[[-90,-180], [90,180]]}
+        minZoom={3}
+        attributionControl
+        customAttribution="https://hub.arcgis.com/datasets/4c1cd73495d3490a9dfa9d43fe2df852_3"
+      >
         <MapboxLayer
           accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           style='mapbox://styles/mauricebecnel400/cjomdc81d1tch2sp3zcedcmqv'
@@ -39,7 +46,6 @@ export default class MapComponent extends Component {
               data={geoJSON}
               key={`gjson-layer-at${Date.now()}`}
               onEachFeature={(feature, layer) => {
-                console.log(feature.properties.date);
                 layer.bindPopup(`${moment.utc(feature.properties.date, 'X').format('MMM DD, YYYY')}`);
               }}
             />

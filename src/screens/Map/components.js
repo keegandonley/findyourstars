@@ -23,3 +23,10 @@ export const MapLoader = styled.div`
 		font-size: 2em;
 	}
 `;
+
+export const LocationIcon = styled.div`
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+`;
