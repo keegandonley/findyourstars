@@ -31,8 +31,10 @@ export default class MapScreen extends Component {
     navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this));
   }
 
-  error(err) {
+  async error(err) {
     this.getConditions();
+    const fallback = await Axios.get('http://ip-api.com/json');
+    this.setState({ lat: fallback.data.lat, lng: fallback.data.lon });
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
