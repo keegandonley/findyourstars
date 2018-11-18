@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-pro": "^5.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.8",
     "@fortawesome/pro-regular-svg-icons": "^5.5.0",
     "@fortawesome/pro-solid-svg-icons": "^5.5.0",
     "@fortawesome/react-fontawesome": "^0.1.3",
+    "@google-cloud/datastore": "^2.0.0",
+    "axios": "^0.18.0",
+    "dexie": "^2.0.4",
     "leaflet": "^1.3.4",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -20,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "process": "node ./scripts/eclipses.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,8 +35,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "@fortawesome/fontawesome-pro": "^5.5.0"
-  }
+  ]
 }
