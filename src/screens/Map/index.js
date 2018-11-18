@@ -20,6 +20,7 @@ export default class MapScreen extends Component {
     startDate: moment(),
     endDate: moment().add(10, 'y'),
     FocusedInput: null,
+    error: false,
   }
   
   componentDidMount() {
@@ -43,21 +44,29 @@ export default class MapScreen extends Component {
   }
 
   async getISSLocation() {
-    const { data } = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/iss');
-    this.setState({ ISSPosition: data.iss_position });
+    try {
+      const { data } = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/iss');
+      this.setState({ ISSPosition: data.iss_position });
+    } catch (e) {
+      this.setState({ error: true });
+    }
   }
 
   async getConditions(lat = null, long = null) {
-    const config = {
-      method: 'GET',
-      params: {
-        lat,
-        long,
-      },
-      url: 'https://us-central1-sachacks-222818.cloudfunctions.net/conditions',
+    try {
+      const config = {
+        method: 'GET',
+        params: {
+          lat,
+          long,
+        },
+        url: 'https://us-central1-sachacks-222818.cloudfunctions.net/conditions',
+      }
+      const { data } = await Axios(config);
+      this.setState({ conditions: data });
+    } catch (e) {
+      this.setState({ error: true });
     }
-    const { data } = await Axios(config);
-    this.setState({ conditions: data });
   }
 
   toggleSolarEclipsePaths() {

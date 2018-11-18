@@ -21,38 +21,44 @@ export default class Landing extends Component {
 		loadingPerc: 0,
 		loadingText: 'preparing',
 		geometries: {},
+		error: false,
 	}
 	async getGeometries() {
-		await this.setState({ loadingPerc: 10, loadingText: 'fetching eclipse geometries' });
-		let { data } = await Axios.get(`/data/eclipse_geometries.json`);
-		const db = new Dexie("Geometries");
-		db.version(2).stores({
-			eclipses: "&id",
-			paths: "&id",
-		});
-		await db.eclipses.bulkPut(Object.keys(data).map((id) => {
-			return {
-				id: id,
-				value: data[id]
-			};
-		}));
-		await this.setState({ loadingPerc: 25, loadingText: 'fetching eclipse locations' });
-		const eclipses = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/http');
-		await db.paths.bulkPut(eclipses.data[0].map((eclipse) => {
-			const { eclipse_id, ...rest } = eclipse;
-			if (!eclipse_id) {
-				return null;
-			}
-			return {
-				id: `${eclipse_id}`,
-				...rest
-			};
-		}).filter(x => x));
-		db.close();
-		await this.setState({ loadingPerc: 100, loadingText: 'logging you in securely', geometries: data });
-		setTimeout(() => {
-			this.setState({ loading: false });
-		}, 2000);
+		try {
+			await this.setState({ loadingPerc: 10, loadingText: 'fetching eclipse geometries' });
+			let { data } = await Axios.get(`/data/eclipse_geometries.json`);
+			const db = new Dexie("Geometries");
+			db.version(2).stores({
+				eclipses: "&id",
+				paths: "&id",
+			});
+			await db.eclipses.bulkPut(Object.keys(data).map((id) => {
+				return {
+					id: id,
+					value: data[id]
+				};
+			}));
+			await this.setState({ loadingPerc: 25, loadingText: 'fetching eclipse locations' });
+			const eclipses = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/http');
+			await db.paths.bulkPut(eclipses.data[0].map((eclipse) => {
+				const { eclipse_id, ...rest } = eclipse;
+				if (!eclipse_id) {
+					return null;
+				}
+				return {
+					id: `${eclipse_id}`,
+					...rest
+				};
+			}).filter(x => x));
+			db.close();
+			await this.setState({ loadingPerc: 100, loadingText: 'logging you in securely', geometries: data });
+			setTimeout(() => {
+				this.setState({ loading: false });
+			}, 2000);
+		} catch (e) {
+			this.setState({ error: true });
+		}
+		
 	}
 
 	componentDidMount() {
