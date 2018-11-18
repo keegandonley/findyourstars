@@ -6,6 +6,7 @@ import Menu from '../../components/Menu';
 import Dexie from 'dexie';
 import { faStar } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Axios from 'axios';
   
 export default class MapScreen extends Component {
   state = {
@@ -16,6 +17,7 @@ export default class MapScreen extends Component {
   
   componentDidMount() {
     this.buildGeoJSON();
+    this.getISSLocation();
     navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this));
   }
 
@@ -30,6 +32,11 @@ export default class MapScreen extends Component {
         lat: crd.latitude,
         lng: crd.longitude,
     });
+  }
+
+  async getISSLocation() {
+    const { data } = await Axios.get('http://api.open-notify.org/iss-now.json');
+    this.setState({ ISSPosition: data.iss_position });
   }
 
   async buildGeoJSON() {
@@ -77,16 +84,17 @@ export default class MapScreen extends Component {
   }
 
   render() {
-    const { geoJSON } = this.state;
+    const { geoJSON, ISSPosition } = this.state;
     return (
         <Wrapper>
             <Menu/>
             {
-              geoJSON
+              geoJSON && ISSPosition
                 ? <MapComponent 
                     currentLat={this.state.lat}
                     currentLng={this.state.lng}
                     geoJSON={geoJSON}
+                    ISSPosition={ISSPosition}
                   />
                 : <MapLoader>
                   <div>
