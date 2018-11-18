@@ -35,7 +35,7 @@ export const LoadingStar = styled.div`
 		font-size: 2em;
 		animation: fys-load 2s infinite;
 	}
-	padding-bottom: 20px;
+	padding-bottom: 12px;
 	color: #FFFFAA;
 `;
 
@@ -61,7 +61,7 @@ export const LoaderInner = styled.div`
 export const LoadingText = styled.div`
 	text-align: center;
 	padding-top: 8px;
-	font-size: 0.6em;
+	font-size: 0.3em;
 	opacity: ${props => (props.visible ? 1 : 0)};
 	transition: opacity 1s;
 	color: #FFFFAA;
