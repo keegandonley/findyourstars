@@ -14,6 +14,7 @@ import {
 	LoadingData
 } from './components';
 import Starjs from './stargen';
+import frontLogo from './findyourstars_LogoTitle.svg'
 
 export default class Landing extends Component {
 	state = {
@@ -65,7 +66,9 @@ export default class Landing extends Component {
 		localStorage.setItem('data', true);
 		const stars = new Starjs({ id: 'myStars' });
 		stars.init();
-		this.getGeometries();
+		setTimeout(() => {
+			this.getGeometries();
+		}, 500);
 	}
 
 	render() {
@@ -76,14 +79,22 @@ export default class Landing extends Component {
 		return (
 			<Wrapper>
 				<StarContainer id="myStars"></StarContainer>
-				<LoadingData>
-					<LoadingStar>
-						<FontAwesomeIcon icon={faStar} />
-					</LoadingStar>
-					<LoaderWrapper visible={loadingPerc > 0}>
-						<LoaderInner perc={loadingPerc}/>
-					</LoaderWrapper>
-					<LoadingText visible={loadingPerc > 0}>{loadingText}...</LoadingText>
+				<LoadingData large={loadingPerc <= 10}>
+					<img src={frontLogo} alt="logo" />
+					{
+						loadingPerc > 10
+							? (
+								<React.Fragment>
+									<LoadingStar>
+										<FontAwesomeIcon icon={faStar} />
+									</LoadingStar>
+									<LoaderWrapper visible={loadingPerc > 0}>
+										<LoaderInner perc={loadingPerc}/>
+									</LoaderWrapper>
+									<LoadingText visible={loadingPerc > 0}>{loadingText}...</LoadingText>
+								</React.Fragment>
+							) : ''
+					}
 				</LoadingData>
 			</Wrapper>
 		);

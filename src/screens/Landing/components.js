@@ -37,6 +37,7 @@ export const LoadingStar = styled.div`
 	}
 	padding-bottom: 12px;
 	color: #FFFFAA;
+	opacity: 0.7;
 `;
 
 export const LoaderWrapper = styled.div`
@@ -48,6 +49,7 @@ export const LoaderWrapper = styled.div`
 	border-radius: 8px;
 	opacity: ${props => (props.visible ? 1 : 0)};
 	transition: opacity 1s;
+	opacity: 0.7;
 `;
 
 export const LoaderInner = styled.div`
@@ -68,6 +70,31 @@ export const LoadingText = styled.div`
 `;
 
 export const LoadingData = styled.div`
+	animation: fadeInComp 4s;
 	width: 100%;
 	margin: 0 auto;
+	text-align: center;
+
+	@keyframes logoAnimation {
+		0% {
+			transform: TranslateY(0);
+			opacity: 1;
+		}
+		25% {
+			transform: TranslateY(0);
+			opacity: 1;
+		}
+		100% {
+			transform: TranslateY(0px);
+			opacity: 0.7;
+		}
+	}
+
+	& img {
+		animation: logoAnimation 3s forwards;
+		max-width: ${props => (props.large ?  '90%' : '700px')};
+		width: ${props => (props.large ?  '100%' : '90%')};
+		margin: auto;
+		transition: 1.5s;
+	}
 `;
