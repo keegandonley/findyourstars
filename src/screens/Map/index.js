@@ -1,6 +1,7 @@
-
-import React, { Component } from 'react'
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import React, { Component } from 'react';
+import {Wrapper} from './components';
+import MapComponent from '../../components/Map';
+import Menu from '../../components/Menu';
   
 export default class MapScreen extends Component {
   state = {
@@ -27,19 +28,14 @@ export default class MapScreen extends Component {
   }
 
   render() {
-    const position = [this.state.lat, this.state.lng]
     return (
-      <Map center={position} zoom={this.state.zoom}>
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </Map>
+        <Wrapper>
+            <Menu/>
+            <MapComponent 
+                currentLat={this.state.lat}
+                currentLng={this.state.lng}
+            />
+        </Wrapper>
     )
   }
 }
