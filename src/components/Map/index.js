@@ -37,6 +37,7 @@ export default class MapComponent extends Component {
           ? (
             <GeoJSON
               data={geoJSON}
+              key={`gjson-layer-at${Date.now()}`}
               onEachFeature={(feature, layer) => {
                 console.log(feature.properties.date);
                 layer.bindPopup(`${moment.utc(feature.properties.date, 'X').format('MMM DD, YYYY')}`);

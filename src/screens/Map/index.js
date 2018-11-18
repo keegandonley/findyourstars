@@ -7,13 +7,19 @@ import Dexie from 'dexie';
 import { faStar } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Axios from 'axios';
-  
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
 export default class MapScreen extends Component {
   state = {
     lat: 39.8283,
     lng: -98.5795,
     geoJSON: null,
     solarPathEnabled: true,
+    currentYear: 0,
+    startDate: moment(),
+    endDate: moment().add(10, 'y'),
+    FocusedInput: null,
   }
   
   componentDidMount() {
@@ -58,6 +64,18 @@ export default class MapScreen extends Component {
     this.setState((prevState)=>{ return {solarPathEnabled: !prevState.solarPathEnabled}})
   }
 
+  onDatesChange({ startDate, endDate }) {
+      this.setState({startDate, endDate});
+      if (startDate && startDate.isValid() && endDate && endDate.isValid()) {
+        this.buildGeoJSON();
+      }
+  }
+
+  changeYear(year){
+      console.log(this.state.currentYear);
+      this.setState({currentYear: year});
+  }
+
   async buildGeoJSON() {
     const db = new Dexie("Geometries");
     const datares = await db.open();
@@ -66,8 +84,8 @@ export default class MapScreen extends Component {
     // Get paths first
     const pathsTable = datares.table('paths');
     const pathsData = await pathsTable.toArray();
-    const start = moment(Date.now()).unix();
-    const end = moment().add(10, 'y').unix();
+    const start = this.state.startDate.unix();
+    const end = this.state.endDate.unix();
     pathsData.forEach((path) => {
       if (!mappings[path.id] && path.epoch > start && path.epoch < end) {
         mappings[path.id] = {
@@ -101,16 +119,24 @@ export default class MapScreen extends Component {
       })
     };
     db.close();
-    this.setState({ geoJSON: res });
+    await this.setState({ geoJSON: res });
   }
 
   render() {
-    const { geoJSON, ISSPosition, conditions } = this.state;
+    const { geoJSON, ISSPosition, startDate, endDate, conditions } = this.state;
+
     return (
         <Wrapper>
             <Menu
                 toggleSolarEclipsePaths={this.toggleSolarEclipsePaths.bind(this)}
                 solarPathEnabled={this.state.solarPathEnabled}
+                startDate={startDate}
+                startDateId={startDate && startDate.toString() || 'startDate-noID'}
+                endDateId={endDate && endDate.toString() || 'endDate-noID'}
+                endDate={endDate}
+                onDatesChange={this.onDatesChange.bind(this)}
+                focusedInput={this.state.FocusedInput}
+                onFocusChange={FocusedInput => this.setState({ FocusedInput })}
                 conditions={conditions || null}
             />
             {
