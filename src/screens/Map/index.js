@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import {Wrapper} from './components';
+import {Wrapper, MapLoader} from './components';
 import MapComponent from '../../components/Map';
 import Menu from '../../components/Menu';
 import Dexie from 'dexie';
+import { faStar } from '@fortawesome/pro-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
   
 export default class MapScreen extends Component {
   state = {
     lat: 39.8283,
     lng: -98.5795,
-    zoom: 13,
     geoJSON: null,
   }
   
@@ -76,7 +77,6 @@ export default class MapScreen extends Component {
       })
     };
     db.close();
-    console.log(res);
     this.setState({ geoJSON: res });
   }
 
@@ -94,7 +94,14 @@ export default class MapScreen extends Component {
                     currentLng={this.state.lng}
                     geoJSON={geoJSON}
                   />
-                : 'loading'
+                : <MapLoader>
+                  <div>
+                    <FontAwesomeIcon spin icon={faStar} />
+                    <br />
+                    <br />
+                    Building your map
+                  </div>
+                </MapLoader>
             }
             
         </Wrapper>
