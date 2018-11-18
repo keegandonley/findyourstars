@@ -38,7 +38,6 @@ export default class Landing extends Component {
 		}));
 		await this.setState({ loadingPerc: 25, loadingText: 'fetching eclipse locations' });
 		const eclipses = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/http');
-		console.log(eclipses.data);
 		await db.paths.bulkPut(eclipses.data[0].map((eclipse) => {
 			const { eclipse_id, ...rest } = eclipse;
 			if (!eclipse_id) {

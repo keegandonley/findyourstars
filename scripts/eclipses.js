@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Datastore = require('@google-cloud/datastore');
+const moment = require('moment');
 
 const res = fs.readFileSync(path.join(__dirname, '../data/eclipses-comp.geojson'));
 const stringData = res.toString('utf-8');
@@ -9,7 +10,7 @@ const { features } = data;
 
 const clean = features.map(({ properties, geometry }) => {
 	const historicalCutoff = 1484699710;
-	const eventDate = Date.parse(properties.Date_);
+	const eventDate = moment(properties.Date_).unix();
 	if (eventDate < historicalCutoff) {
 		return null;
 	}
@@ -37,7 +38,6 @@ const clean = features.map(({ properties, geometry }) => {
 		geometry: geometry,
 	}
 }).filter(x => x);
-console.log(clean.length);
 
 const projectId = 'sachacks-222818';
 const datastore = new Datastore({
@@ -76,9 +76,9 @@ clean.forEach((element) => {
 	};
 	geometries[element.id] = element.geometry.coordinates;
 
-	// datastore.save(task).then(() => {
-	// 	console.log(`saved ${element.name} (${element.id})`);
-	// });
+	datastore.save(task).then(() => {
+		console.log(`saved ${element.name} (${element.id})`);
+	});
 });
 
 fs.writeFileSync(path.join(__dirname, '../public/data/eclipse_geometries.json'), JSON.stringify(geometries));
