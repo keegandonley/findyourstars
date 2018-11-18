@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import {Wrapper, Header} from './components';
+import Logo from '../../resources/findyourstars_logo.svg';
+import {Wrapper, Header, Container} from './components';
+import Tile from '../../components/Tile';
 
 export default class Menu extends Component {
-  state = {
-    currentLat: 51.505,
-    currentLng: -0.09,
-    zoom: 13,
-  }
-  
-  componentDidMount() {
-    this.setState({
-      currentLat: this.props.currentLat,
-      currentLng: this.props.currentLng,
-    });
-  }
 
   render() {
     return (
         <Wrapper>
-          <Header> Find Your Stars </Header>
+          <Header>
+            <img src={Logo} />
+          </Header>
+          <Container>
+            <Tile></Tile>
+          </Container>
         </Wrapper>
     )
   }
