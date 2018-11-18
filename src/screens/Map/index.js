@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import {Wrapper} from './components';
 import MapComponent from '../../components/Map';
 import Menu from '../../components/Menu';
@@ -38,8 +39,8 @@ export default class MapScreen extends Component {
     // Get paths first
     const pathsTable = datares.table('paths');
     const pathsData = await pathsTable.toArray();
-    const start = Math.floor(Date.now());
-    const end = start + 31557600 * 10000;
+    const start = moment(Date.now()).unix();
+    const end = moment().add(10, 'y').unix();
     pathsData.forEach((path) => {
       if (!mappings[path.id] && path.epoch > start && path.epoch < end) {
         mappings[path.id] = {
@@ -71,6 +72,7 @@ export default class MapScreen extends Component {
       })
     };
     db.close();
+    console.log(res);
     this.setState({ geoJSON: res });
   }
 
