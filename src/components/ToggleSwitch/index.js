@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Logo from '../../resources/findyourstars_logo.svg';
 import {Wrapper, Switch, Slider} from './components';
 
 export default class ToggleSwitch extends Component {
@@ -16,11 +15,11 @@ export default class ToggleSwitch extends Component {
   render() {
     return (
         <Wrapper>
-            <Switch enabled={this.state.enabled}>
-                <Slider 
-                    onClick={()=>this.clickHandler()}
-                    enabled={this.state.enabled}
-                />
+            <Switch 
+                enabled={this.state.enabled}
+                onClick={()=>this.clickHandler()}
+            >
+                <Slider enabled={this.state.enabled}/>
             </Switch>
             {this.props.label}
         </Wrapper>

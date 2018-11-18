@@ -22,4 +22,21 @@ code {
 .leaflet-container {
   height: 100vh;
   width: 100%;
+  z-index: 0;
+}
+
+.DateRangePicker *, .SingleDatePicker *, .DayPickerRangeController * {
+  box-sizing: border-box;
+}
+
+.DateRangePicker {
+  padding: 10px 0 0 5px;
+}
+
+.DateInput_fang {
+  display: none;
+}
+
+input.DateInput_input {
+  text-align: center;
 }

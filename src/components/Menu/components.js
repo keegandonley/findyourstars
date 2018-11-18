@@ -14,7 +14,7 @@ export const Header = styled.div`
     width: 100%;
     align-items: center;
     padding: 15px;
-    & img {
+    & > img {
         width: 90%;
         margin: 0 auto;
     }
@@ -22,10 +22,5 @@ export const Header = styled.div`
 
 export const Container = styled.div`
     width: 100%;
-	align-items: center;
-    // overflow: scroll;
+    align-items: center;
 `;
-
-
-
-
