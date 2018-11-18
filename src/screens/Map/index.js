@@ -28,6 +28,7 @@ export default class MapScreen extends Component {
   }
 
   render() {
+      console.log(this.state);
     return (
         <Wrapper>
             <Menu/>
