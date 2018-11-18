@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-operators */
 import React, { Component } from 'react';
 import moment from 'moment';
-import {Wrapper, MapLoader, LocationIcon} from './components';
+import {Wrapper, MapLoader, LocationIcon, Attribution} from './components';
 import MapComponent from '../../components/Map';
 import Menu from '../../components/Menu';
 import Dexie from 'dexie';
@@ -172,6 +172,9 @@ export default class MapScreen extends Component {
                         onClick={() => navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this))}
                       />
                     </LocationIcon>
+                    <Attribution>
+                      <a href="https://hub.arcgis.com/datasets/4c1cd73495d3490a9dfa9d43fe2df852_3" rel="noopener noreferrer" target="_blank">eclipse data</a> from arcgis hub | conditions from <a href="https://darksky.net/dev" rel="noopener noreferrer" target="_blank">darkSky</a> | tiles from <a href="https://www.mapbox.com" rel="noopener noreferrer" target="_blank">mapBox</a> | ISS location data from <a href="http://api.open-notify.org" rel="noopener noreferrer" target="_blank">open-notify</a>
+                    </Attribution>
                   </React.Fragment>
                 : <MapLoader>
                   <div>

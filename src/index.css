@@ -41,7 +41,7 @@ code {
 }
 
 .DateRangePicker {
-  padding: 10px 0 0 5px;
+  padding: 10px 0 0 auto;
   z-index: 9999;
   animation: fadeInComp 1s forwards;
 }

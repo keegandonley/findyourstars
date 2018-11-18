@@ -31,3 +31,20 @@ export const LocationIcon = styled.div`
 	top: 10px;
 	cursor: pointer;
 `;
+
+export const Attribution = styled.div`
+	position: absolute;
+	right: 60px;
+	bottom: 0;
+	font-size: 0.35em;
+	height: 16px;
+	background-color: rgba(0, 0, 0, 0.7);
+	line-height: 16px;
+	padding: 0 10px;
+	opacity: 0.7;
+
+	& a {
+		color: #3B87AE;
+		text-decoration: none;
+	}
+`;

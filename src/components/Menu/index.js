@@ -52,20 +52,23 @@ export default class Menu extends Component {
             <img src={Logo} alt="logo" />
           </Header>
           <Container>
-            <ToggleSwitch label={"Paths for Solar Eclipse"} clickHandler={this.props.toggleSolarEclipsePaths}/>
+            <ToggleSwitch label={"Paths for Solar Eclipses"} clickHandler={this.props.toggleSolarEclipsePaths}/>
             {
               solarPathEnabled
                 ? (
-                  <DateRangePicker
-                    startDate={this.props.startDate} // momentPropTypes.momentObj or null,
-                    startDateId={this.props.startDateId} // PropTypes.string.isRequired,
-                    endDate={this.props.endDate} // momentPropTypes.momentObj or null,
-                    endDateId={this.props.endDateId} // PropTypes.string.isRequired,
-                    onDatesChange={this.props.onDatesChange} // PropTypes.func.isRequired,
-                    focusedInput={this.props.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                    onFocusChange={this.props.onFocusChange} // PropTypes.func.isRequired,
-                    isOutsideRange={() => false}
-                  />
+                  <React.Fragment>
+                    <small>(click an eclipse path to view date)</small>
+                    <DateRangePicker
+                      startDate={this.props.startDate} // momentPropTypes.momentObj or null,
+                      startDateId={this.props.startDateId} // PropTypes.string.isRequired,
+                      endDate={this.props.endDate} // momentPropTypes.momentObj or null,
+                      endDateId={this.props.endDateId} // PropTypes.string.isRequired,
+                      onDatesChange={this.props.onDatesChange} // PropTypes.func.isRequired,
+                      focusedInput={this.props.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                      onFocusChange={this.props.onFocusChange} // PropTypes.func.isRequired,
+                      isOutsideRange={() => false}
+                    />
+                  </React.Fragment>
                 ) : ''
             }
             

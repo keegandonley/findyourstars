@@ -23,6 +23,13 @@ export const Header = styled.div`
 export const Container = styled.div`
     width: 100%;
     align-items: center;
+    text-align: center;
+
+    & small {
+        font-size: 0.4em;
+        color: grey;
+        width: 100%;
+    }
 `;
 
 export const Condition = styled.div`
