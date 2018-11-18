@@ -15,7 +15,7 @@ export default class MapScreen extends Component {
     lat: 39.8283,
     lng: -98.5795,
     geoJSON: null,
-    solarPathEnabled: false,
+    solarPathEnabled: true,
     currentYear: 0,
     startDate: moment(),
     endDate: moment().add(10, 'y'),
@@ -29,12 +29,13 @@ export default class MapScreen extends Component {
   }
 
   error(err) {
+    this.getConditions();
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
   locationSuccess(pos) {
     var crd = pos.coords;
-
+    this.getConditions(crd.latitude, crd.longitude);
     this.setState({
         lat: crd.latitude,
         lng: crd.longitude,
@@ -44,6 +45,19 @@ export default class MapScreen extends Component {
   async getISSLocation() {
     const { data } = await Axios.get('https://us-central1-sachacks-222818.cloudfunctions.net/iss');
     this.setState({ ISSPosition: data.iss_position });
+  }
+
+  async getConditions(lat = null, long = null) {
+    const config = {
+      method: 'GET',
+      params: {
+        lat,
+        long,
+      },
+      url: 'https://us-central1-sachacks-222818.cloudfunctions.net/conditions',
+    }
+    const { data } = await Axios(config);
+    this.setState({ conditions: data });
   }
 
   toggleSolarEclipsePaths() {
@@ -107,7 +121,7 @@ export default class MapScreen extends Component {
   }
 
   render() {
-    const { geoJSON, ISSPosition, startDate, endDate } = this.state;
+    const { geoJSON, ISSPosition, startDate, endDate, conditions } = this.state;
 
     return (
         <Wrapper>
@@ -120,6 +134,7 @@ export default class MapScreen extends Component {
                 onDatesChange={this.onDatesChange.bind(this)}
                 focusedInput={this.state.FocusedInput}
                 onFocusChange={FocusedInput => this.setState({ FocusedInput })}
+                conditions={conditions || null}
             />
             {
               geoJSON && ISSPosition
