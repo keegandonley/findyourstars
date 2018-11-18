@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { Component } from 'react';
 import moment from 'moment';
 import {Wrapper, MapLoader} from './components';
