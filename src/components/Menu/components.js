@@ -26,6 +26,20 @@ export const Container = styled.div`
     // overflow: scroll;
 `;
 
+export const Condition = styled.div`
+    width: 100%;
+    display: flex;
+    padding: 5px 10px;
+    font-size: 0.6em;
+    text-align: center;
+    align-items: center;
+
+    & svg {
+        padding-right: 10px;
+        min-width: 40px;
+    }
+`;
+
 
 
 
