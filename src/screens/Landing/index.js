@@ -4,6 +4,7 @@ import { faStar } from '@fortawesome/pro-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import { Wrapper, StarContainer, LoadingStar, LoaderWrapper, LoaderInner, LoadingText, LoadingData } from './components';
 import Starjs from './stargen';
+import eclipses from '../../data/eclipse_geometries.json';
 
 export default class Landing extends Component {
 	state = {
