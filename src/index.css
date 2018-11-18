@@ -29,8 +29,19 @@ code {
   box-sizing: border-box;
 }
 
+@keyframes fadeInComp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .DateRangePicker {
   padding: 10px 0 0 5px;
+  z-index: 9999;
+  animation: fadeInComp 1s forwards;
 }
 
 .DateInput_fang {
@@ -39,4 +50,8 @@ code {
 
 input.DateInput_input {
   text-align: center;
+}
+
+.DateRangePickerInput_arrow {
+  vertical-align: unset !important;
 }

@@ -45,7 +45,7 @@ function getConditions(conditions) {
 
 export default class Menu extends Component {
   render() {
-    const { conditions } = this.props;
+    const { conditions, solarPathEnabled } = this.props;
     return (
         <Wrapper>
           <Header>
@@ -53,16 +53,22 @@ export default class Menu extends Component {
           </Header>
           <Container>
             <ToggleSwitch label={"Paths for Solar Eclipse"} clickHandler={this.props.toggleSolarEclipsePaths}/>
-            <DateRangePicker
-              startDate={this.props.startDate} // momentPropTypes.momentObj or null,
-              startDateId={this.props.startDateId} // PropTypes.string.isRequired,
-              endDate={this.props.endDate} // momentPropTypes.momentObj or null,
-              endDateId={this.props.endDateId} // PropTypes.string.isRequired,
-              onDatesChange={this.props.onDatesChange} // PropTypes.func.isRequired,
-              focusedInput={this.props.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-              onFocusChange={this.props.onFocusChange} // PropTypes.func.isRequired,
-              isOutsideRange={() => false}
-            />
+            {
+              solarPathEnabled
+                ? (
+                  <DateRangePicker
+                    startDate={this.props.startDate} // momentPropTypes.momentObj or null,
+                    startDateId={this.props.startDateId} // PropTypes.string.isRequired,
+                    endDate={this.props.endDate} // momentPropTypes.momentObj or null,
+                    endDateId={this.props.endDateId} // PropTypes.string.isRequired,
+                    onDatesChange={this.props.onDatesChange} // PropTypes.func.isRequired,
+                    focusedInput={this.props.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                    onFocusChange={this.props.onFocusChange} // PropTypes.func.isRequired,
+                    isOutsideRange={() => false}
+                  />
+                ) : ''
+            }
+            
             {getConditions(conditions)}
           </Container>
         </Wrapper>
