@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Map, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import MapboxLayer from '../MapBox';
-import ISSIconImage from './ISSicon.png';
+import ISSIconImage from './international_space_station.png';
 
 
 export default class MapComponent extends Component {
@@ -16,9 +16,9 @@ export default class MapComponent extends Component {
     const { geoJSON, ISSPosition } = this.props;
     const ISSIcon = L.icon({
       iconUrl: ISSIconImage,
-      iconSize: [66,40],
-      iconAnchor: [33, 20],
-      popupAnchor: [0, -20],
+      iconSize: [80,80],
+      iconAnchor: [40, 40],
+      popupAnchor: [-4, -40],
       shadowUrl: null,
       shadowSize: null,
       shadowAnchor: null
