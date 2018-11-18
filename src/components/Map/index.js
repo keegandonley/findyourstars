@@ -32,9 +32,7 @@ export default class MapComponent extends Component {
           renderWorldCopies={false}
         >
         </MapboxLayer>
-        <GeoJSON
-          data={geoJSON}
-        />
+        {this.props.solarPathEnabled ? <GeoJSON data={geoJSON}/> : null}
         <Marker position={currentPosition}>
           <Popup>
             You are Here

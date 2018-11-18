@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Logo from '../../resources/findyourstars_logo.svg';
 import {Wrapper, Header, Container} from './components';
-import Tile from '../../components/Tile';
+import ToggleSwitch from '../ToggleSwitch';
 
 export default class Menu extends Component {
 
@@ -12,7 +12,7 @@ export default class Menu extends Component {
             <img src={Logo} />
           </Header>
           <Container>
-            <Tile></Tile>
+            <ToggleSwitch label={"Paths for Solar Eclipse"} clickHandler={this.props.toggleSolarEclipsePaths}/>
           </Container>
         </Wrapper>
     )

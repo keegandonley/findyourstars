@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
 	align-items: center;
     background-color: black;
+    border-right: 1px solid white;
 `;
 
 export const Header = styled.div` 
@@ -24,6 +25,7 @@ export const Container = styled.div`
 	align-items: center;
     // overflow: scroll;
 `;
+
 
 
 

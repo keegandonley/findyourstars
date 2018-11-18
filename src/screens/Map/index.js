@@ -13,6 +13,7 @@ export default class MapScreen extends Component {
     lat: 39.8283,
     lng: -98.5795,
     geoJSON: null,
+    solarPathEnabled: false,
   }
   
   componentDidMount() {
@@ -37,6 +38,10 @@ export default class MapScreen extends Component {
   async getISSLocation() {
     const { data } = await Axios.get('http://api.open-notify.org/iss-now.json');
     this.setState({ ISSPosition: data.iss_position });
+  }
+
+  toggleSolarEclipsePaths() {
+    this.setState((prevState)=>{ return {solarPathEnabled: !prevState.solarPathEnabled}})
   }
 
   async buildGeoJSON() {
@@ -87,7 +92,9 @@ export default class MapScreen extends Component {
     const { geoJSON, ISSPosition } = this.state;
     return (
         <Wrapper>
-            <Menu/>
+            <Menu
+                toggleSolarEclipsePaths={this.toggleSolarEclipsePaths.bind(this)}
+            />
             {
               geoJSON && ISSPosition
                 ? <MapComponent 
@@ -95,6 +102,7 @@ export default class MapScreen extends Component {
                     currentLng={this.state.lng}
                     geoJSON={geoJSON}
                     ISSPosition={ISSPosition}
+                    solarPathEnabled={this.state.solarPathEnabled}
                   />
                 : <MapLoader>
                   <div>
