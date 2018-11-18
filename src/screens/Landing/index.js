@@ -32,6 +32,9 @@ export default class Landing extends Component {
 		setTimeout(() => {
 			this.setState({ loading: false });
 		}, 7000);
+		if (navigator.geolocation) {
+			console.log(navigator.geolocation.getCurrentPosition);
+		};
 	}
 
 	render() {
