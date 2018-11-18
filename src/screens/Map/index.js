@@ -31,6 +31,10 @@ export default class MapScreen extends Component {
     });
   }
 
+  toggleSolarEclipsePaths() {
+    console.log('triggered');
+}
+
   async buildGeoJSON() {
     const db = new Dexie("Geometries");
     const datares = await db.open();
@@ -80,7 +84,9 @@ export default class MapScreen extends Component {
     const { geoJSON } = this.state;
     return (
         <Wrapper>
-            <Menu/>
+            <Menu
+                toggleSolarEclipsePaths={this.toggleSolarEclipsePaths}
+            />
             {
               geoJSON
                 ? <MapComponent 
