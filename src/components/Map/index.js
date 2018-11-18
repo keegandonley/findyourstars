@@ -10,6 +10,7 @@ export default class MapComponent extends Component {
   }
   
   componentDidMount() {
+    console.log('mounted child: ', this.state.currentLat);
     this.setState({
       currentLat: this.props.currentLat,
       currentLng: this.props.currentLng,
@@ -17,6 +18,7 @@ export default class MapComponent extends Component {
   }
 
   render() {
+    console.log('child component ', this.state.currentLat);
     const currentPosition = [this.state.currentLat, this.state.currentLng]
     return (
       <Map center={currentPosition} zoom={this.state.zoom}>
