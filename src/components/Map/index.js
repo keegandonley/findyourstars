@@ -6,7 +6,7 @@ import MapboxLayer from '../MapBox';
 
 export default class MapComponent extends Component {
   state = {
-    zoom: 13,
+    zoom: 4,
   }
 
   render() {
