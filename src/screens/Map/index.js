@@ -10,7 +10,7 @@ export default class MapScreen extends Component {
   }
   
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(this.locationSuccess, this.error);
+    navigator.geolocation.getCurrentPosition(this.locationSuccess.bind(this), this.error.bind(this));
   }
 
   error(err) {
@@ -23,7 +23,7 @@ export default class MapScreen extends Component {
     this.setState({
         lat: crd.latitude,
         lng: crd.longitude,
-    })
+    });
   }
 
   render() {
