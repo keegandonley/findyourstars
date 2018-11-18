@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { DateRangePicker } from 'react-dates';
 import moment from 'moment';
 import Logo from '../../resources/findyourstars_logo.svg';
-import {Wrapper, Header, Container, Condition} from './components';
+import {Wrapper, Header, Container, Condition, LoadingConditions} from './components';
 import ToggleSwitch from '../ToggleSwitch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getWeatherIcon, getTherm } from './weatherIcons';
-import { faCloud, faMoon } from '@fortawesome/pro-solid-svg-icons';
+import { faCloud, faMoon, faStar } from '@fortawesome/pro-solid-svg-icons';
 import { faSun } from '@fortawesome/pro-light-svg-icons';
 
 function getConditions(conditions) {
     if (!conditions) {
-      return null;
+      return <LoadingConditions><FontAwesomeIcon icon={faStar} spin /></LoadingConditions>;
     }
     const { currently, daily } = conditions;
 

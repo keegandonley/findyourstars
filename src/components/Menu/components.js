@@ -39,6 +39,12 @@ export const Condition = styled.div`
     }
 `;
 
+export const LoadingConditions = styled.div`
+    width: 100%;
+    padding-top: 20px;
+    text-align: center;
+`;
+
 
 
 
