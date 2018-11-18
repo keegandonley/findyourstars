@@ -11,6 +11,7 @@ export default class Landing extends Component {
 		loadingPerc: 0,
 		loadingText: 'preparing'
 	}
+
 	componentDidMount() {
 		const stars = new Starjs({ id: 'myStars' });
 		stars.init();
