@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/pro-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import { Wrapper, StarContainer, LoadingStar, LoaderWrapper, LoaderInner, LoadingText, LoadingData } from './components';
@@ -32,9 +32,6 @@ export default class Landing extends Component {
 		setTimeout(() => {
 			this.setState({ loading: false });
 		}, 7000);
-		if (navigator.geolocation) {
-			console.log(navigator.geolocation.getCurrentPosition);
-		};
 	}
 
 	render() {
