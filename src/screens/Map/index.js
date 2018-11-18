@@ -12,6 +12,7 @@ export default class MapScreen extends Component {
     lat: 39.8283,
     lng: -98.5795,
     geoJSON: null,
+    solarPathEnabled: false,
   }
   
   componentDidMount() {
@@ -33,7 +34,7 @@ export default class MapScreen extends Component {
   }
 
   toggleSolarEclipsePaths() {
-    console.log('triggered');
+    this.setState((prevState)=>{ return {solarPathEnabled: !prevState.solarPathEnabled}})
 }
 
   async buildGeoJSON() {
@@ -85,7 +86,7 @@ export default class MapScreen extends Component {
     return (
         <Wrapper>
             <Menu
-                toggleSolarEclipsePaths={this.toggleSolarEclipsePaths}
+                toggleSolarEclipsePaths={this.toggleSolarEclipsePaths.bind(this)}
             />
             {
               geoJSON
@@ -93,6 +94,7 @@ export default class MapScreen extends Component {
                     currentLat={this.state.lat}
                     currentLng={this.state.lng}
                     geoJSON={geoJSON}
+                    solarPathEnabled={this.state.solarPathEnabled}
                   />
                 : <MapLoader>
                   <div>

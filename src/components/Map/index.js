@@ -19,9 +19,7 @@ export default class MapComponent extends Component {
           style='mapbox://styles/mauricebecnel400/cjomdc81d1tch2sp3zcedcmqv'
         >
         </MapboxLayer>
-        <GeoJSON
-          data={geoJSON}
-        />
+        {this.props.solarPathEnabled ? <GeoJSON data={geoJSON}/> : null}
         <Marker position={currentPosition}>
           <Popup>
             You are Here
