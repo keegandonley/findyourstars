@@ -37,7 +37,6 @@ const clean = features.map(({ properties, geometry }) => {
 		geometry: geometry,
 	}
 }).filter(x => x);
-console.log(clean.length);
 
 const projectId = 'sachacks-222818';
 const datastore = new Datastore({

@@ -20,7 +20,6 @@ export default class MapScreen extends Component {
 
   locationSuccess(pos) {
     var crd = pos.coords;
-    console.log('sucessfully got user location');
 
     this.setState({
         lat: crd.latitude,
@@ -29,7 +28,6 @@ export default class MapScreen extends Component {
   }
 
   render() {
-      console.log(this.state);
     return (
         <Wrapper>
             <Menu/>
